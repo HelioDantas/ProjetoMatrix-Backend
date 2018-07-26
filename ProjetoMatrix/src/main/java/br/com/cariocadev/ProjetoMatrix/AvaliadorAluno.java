@@ -8,7 +8,7 @@ public class AvaliadorAluno {
 		BigDecimal zero = new BigDecimal("0");
 		BigDecimal dez = new BigDecimal("10");
 		if((nota1 == null) || (nota1.compareTo(dez) == 1) || (nota1.compareTo(zero) == -1))
-				throw new IllegalArgumentException();
+			throw new IllegalArgumentException();
 		}
 
 	public BigDecimal getMaiorNota(BigDecimal[] notas) {
