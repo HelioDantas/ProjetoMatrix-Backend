@@ -4,25 +4,26 @@ import java.math.BigDecimal;
 
 public class AvaliadorAluno {
 
-	public static void testeEntrada(BigDecimal nota1) {
+	public boolean testeEntrada(BigDecimal nota1) {
 		BigDecimal zero = new BigDecimal("0");
 		BigDecimal dez = new BigDecimal("10");
-		if((nota1 == null) || (nota1.compareTo(dez) == 1) || (nota1.compareTo(zero) == -1))
-			throw new IllegalArgumentException();
+		if(nota1 == null)
+			return true;
+		if( (nota1.compareTo(dez) == 1) || (nota1.compareTo(zero) == -1))
+			 return true;
+		
+		return false;
+		
 		}
+		
 
 	public BigDecimal getMaiorNota(BigDecimal[] notas) {
-		try {
-			testeEntrada(notas[0]);
-			testeEntrada(notas[1]);
-			testeEntrada(notas[2]);
-		} catch (IllegalArgumentException e) {
+		if (notas==null)
+				throw new IllegalArgumentException();
+		if((testeEntrada(notas[0]))||(testeEntrada(notas[1]))|| (testeEntrada(notas[2])))
 			throw new IllegalArgumentException();
-		}catch (NullPointerException e) {
-			throw new IllegalArgumentException();
-		}
+			
 	
-
 		BigDecimal maior = new BigDecimal("0");
 		maior = notas[0];
 		if (maior.compareTo(notas[1]) ==-1 ){
@@ -36,13 +37,9 @@ public class AvaliadorAluno {
 	}
 
 	public BigDecimal getMedia(BigDecimal nota1, BigDecimal nota2, BigDecimal nota3) {
-		try {
-			testeEntrada(nota1);
-			testeEntrada(nota2);
-			testeEntrada(nota3);
-		} catch (IllegalArgumentException e) {
+		if ((testeEntrada(nota1))|| (testeEntrada(nota2))|| (testeEntrada(nota3)))
 			throw new IllegalArgumentException();
-		}
+			
 		
 		BigDecimal media = new BigDecimal("0");
 		BigDecimal soma2 = new BigDecimal("0");
@@ -54,14 +51,9 @@ public class AvaliadorAluno {
 	}
 
 	public String getStatus(BigDecimal nota1, BigDecimal nota2, BigDecimal nota3) {
-		try {
-			testeEntrada(nota1);
-			testeEntrada(nota2);
-			testeEntrada(nota3);
-			
-		} catch (IllegalArgumentException e) {
+		if ((testeEntrada(nota1))|| (testeEntrada(nota2))|| (testeEntrada(nota3)))
 			throw new IllegalArgumentException();
-		}
+		
 		BigDecimal media = getMedia(nota1, nota2, nota3);
 		BigDecimal number4 = new BigDecimal("4");
 		BigDecimal number6 = new BigDecimal("6");
