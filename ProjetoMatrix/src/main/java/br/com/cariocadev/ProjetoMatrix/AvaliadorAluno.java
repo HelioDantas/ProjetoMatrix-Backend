@@ -7,7 +7,7 @@ public class AvaliadorAluno {
 	public static void testeEntrada(BigDecimal nota1) {
 		BigDecimal zero = new BigDecimal("0");
 		BigDecimal dez = new BigDecimal("10");
-		if((nota1==null)||(nota1.compareTo(dez)==1)||(nota1.compareTo(zero)==-1))
+		if((nota1 == null) || (nota1.compareTo(dez) == 1) || (nota1.compareTo(zero) == -1))
 				throw new IllegalArgumentException();
 		}
 
@@ -20,7 +20,7 @@ public class AvaliadorAluno {
 			throw new IllegalArgumentException();
 		}catch (NullPointerException e) {
 			throw new IllegalArgumentException();
-	     }
+		}
 	
 
 		BigDecimal maior = new BigDecimal("0");
@@ -45,13 +45,10 @@ public class AvaliadorAluno {
 		}
 		
 		BigDecimal media = new BigDecimal("0");
-		BigDecimal soma1 = new BigDecimal("0");
 		BigDecimal soma2 = new BigDecimal("0");
 		BigDecimal divisor = new BigDecimal("3");
-		
-		soma1 = nota1.add(nota2);
-		soma2 = nota3.add(soma1);
-		media = soma2.divide(divisor,2,BigDecimal.ROUND_HALF_UP);
+		soma2 = nota3.add(nota1.add(nota2));
+		media = soma2.divide(divisor, 2, BigDecimal.ROUND_HALF_UP);
 		return media;
 			
 	}
@@ -72,7 +69,8 @@ public class AvaliadorAluno {
 		
 		if (media.compareTo(number4) ==-1 ){
 			return "REPROVADO";
-		}else if((media.compareTo(number4) ==0)||(media.compareTo(number4) ==1)&&(media.compareTo(number6) ==-1)) {
+		}else 
+			if((media.compareTo(number4) == 0) || (media.compareTo(number4) == 1) && (media.compareTo(number6) == -1)) {
 				return"PROVA_FINAL";
 			}else {
 				return "APROVADO";
