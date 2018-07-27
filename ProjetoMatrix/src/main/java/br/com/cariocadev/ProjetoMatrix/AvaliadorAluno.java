@@ -41,11 +41,11 @@ public class AvaliadorAluno {
 			throw new IllegalArgumentException();
 			
 		
-		BigDecimal media = new BigDecimal("0");
-		BigDecimal soma2 = new BigDecimal("0");
-		BigDecimal divisor = new BigDecimal("3");
-		soma2 = nota3.add(nota1.add(nota2));
-		media = soma2.divide(divisor, 2, BigDecimal.ROUND_HALF_UP);
+		//BigDecimal media = new BigDecimal("0");
+		//BigDecimal soma2 = new BigDecimal("0");
+		//BigDecimal divisor = new BigDecimal("3");
+		BigDecimal soma2 = nota3.add(nota1.add(nota2));
+		BigDecimal media = soma2.divide(new BigDecimal("3"), 2, BigDecimal.ROUND_HALF_UP);
 		return media;
 			
 	}
