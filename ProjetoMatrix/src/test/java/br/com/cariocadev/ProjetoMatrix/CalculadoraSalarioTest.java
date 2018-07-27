@@ -91,6 +91,7 @@ public class CalculadoraSalarioTest {
 		CalculadoraSalario calculadora = new CalculadoraSalario();
 		assertNotNull("O método não deve retonar null", calculadora.getValorPlanoDeSaude(50));
 
+		
 		for (int i = 0; i < 70; i++) {
 			assertEquals(getPrecoPlanoSaudePorIdade(i), calculadora.getValorPlanoDeSaude(i));
 		}
