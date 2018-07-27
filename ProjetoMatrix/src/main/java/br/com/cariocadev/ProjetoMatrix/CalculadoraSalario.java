@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 public class CalculadoraSalario {
 	
 	public boolean testeEntrada(BigDecimal numberteste) {
+		
 		BigDecimal zero = new BigDecimal("0");
 		if(numberteste == null)
 			return true;
@@ -19,14 +20,15 @@ public class CalculadoraSalario {
 
 	public BigDecimal getSalarioLiquido(BigDecimal salarioBruto, BigDecimal percentualImpostoINSS) {
 		
-	if((testeEntrada(salarioBruto)) || (testeEntrada(percentualImpostoINSS)))
-		throw new IllegalArgumentException();
+		if((testeEntrada(salarioBruto)) || (testeEntrada(percentualImpostoINSS)))
+			throw new IllegalArgumentException();
 	
 		BigDecimal valor = (salarioBruto.multiply(percentualImpostoINSS)).divide(new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP);
 		BigDecimal salarioLiquido = salarioBruto.subtract(valor);
 		
 		return salarioLiquido;
 	}
+	
 	public BigDecimal getValorINSS(BigDecimal salarioBruto) {
 
 		if(testeEntrada(salarioBruto))
