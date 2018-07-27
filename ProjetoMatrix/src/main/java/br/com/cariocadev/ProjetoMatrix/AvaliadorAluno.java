@@ -15,7 +15,7 @@ public class AvaliadorAluno {
 		return false;
 		
 		}
-		
+
 
 	public BigDecimal getMaiorNota(BigDecimal[] notas) {
 		if (notas==null)
