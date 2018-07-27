@@ -1,7 +1,7 @@
 package br.com.cariocadev.ProjetoMatrix;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 
 public class CalculadoraSalario {
 	
@@ -50,36 +50,39 @@ public class CalculadoraSalario {
 	}
 
 	public BigDecimal getValorPlanoDeSaude(Integer idade) {
-		double  valorEmInteirosDoDesconto;
-		if (idade==null)
+		String  valorEmInteirosDoDesconto;
+		if (idade == null)
 			throw new IllegalArgumentException();
-		if(testeEntrada(new BigDecimal(idade)))
+		if(idade< 0)
 			throw new IllegalArgumentException();
 		
-		if(idade>=0 && idade<=9)
-			valorEmInteirosDoDesconto = 75.00;
-		else
-			if(idade>10&&idade<=19)
-				valorEmInteirosDoDesconto = 112.50;
-			else
-				if(idade>20 && idade<=29)
-					valorEmInteirosDoDesconto = 168.75;
-				else
-					if (idade>30 && idade<=39)
-						valorEmInteirosDoDesconto = 253.13;
-					else
-						if(idade>40 && idade<=49)
-							valorEmInteirosDoDesconto = 379.69;
-						else
-							if(idade > 50 && idade <=60 )
-								valorEmInteirosDoDesconto = 569.54;
-							else
-								valorEmInteirosDoDesconto = 854.30;
-		
-		BigDecimal valorDoPlano = new BigDecimal(valorEmInteirosDoDesconto);
-	valorDoPlano.divide(new BigDecimal("1"), 2, BigDecimal.ROUND_HALF_UP);
-		//valorDoPlano= new BigDecimal(2);
-		return valorDoPlano;
+		if(idade>=0 && idade<=9) {
+			valorEmInteirosDoDesconto = "75";
+			
+		}else
+			if(idade>=10&&idade<=19) {
+				valorEmInteirosDoDesconto = "112.50";
+			}else
+				if(idade>=20 && idade<=29) {
+					valorEmInteirosDoDesconto = "168.75";
+				}else
+					if (idade>=30 && idade<=39) {
+						valorEmInteirosDoDesconto = "253.13";
+					}else
+						if(idade>=40 && idade<=49) {
+							valorEmInteirosDoDesconto = "379.69";
+						}else
+							if(idade >= 50 && idade <=59 ) {
+								valorEmInteirosDoDesconto = "569.54";
+							}else {
+								valorEmInteirosDoDesconto = "854.30";
+							}
+	
+		BigDecimal str = new BigDecimal(valorEmInteirosDoDesconto).setScale(2);
+		return str;
 	}
+
+
+
 
 }
