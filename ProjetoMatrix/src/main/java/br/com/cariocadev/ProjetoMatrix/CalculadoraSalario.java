@@ -5,6 +5,14 @@ import java.math.BigDecimal;
 
 public class CalculadoraSalario {
 	
+	/*
+	 * Retornar o valor diretamente 
+	 * 
+	 * return numberteste != null && numberteste.compareTo(BigDecimal.ZERO) < 0 
+	 * Existe um erro na lógica desse método. Ele deveria retornar false se o 
+	 * numberteste igual a null && numberteste menor que zero. 
+	 * Neste caso ele esta fazendo o contrário.
+	 */
 	public boolean testeEntrada(BigDecimal numberteste) {
 		
 		BigDecimal zero = new BigDecimal("0");
@@ -18,17 +26,31 @@ public class CalculadoraSalario {
 		}
 		
 
+	/*
+	 * O método esta correto entrento não é necessário criar variáveis para armazenar 
+	 * valores de retorno. Como mehoria tente realizar o retorno diretamente.
+	 */
 	public BigDecimal getSalarioLiquido(BigDecimal salarioBruto, BigDecimal percentualImpostoINSS) {
 		
+		// Verificar anotações no método testeEntrada
 		if((testeEntrada(salarioBruto)) || (testeEntrada(percentualImpostoINSS)))
 			throw new IllegalArgumentException();
 	
 		BigDecimal valor = (salarioBruto.multiply(percentualImpostoINSS)).divide(new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP);
 		BigDecimal salarioLiquido = salarioBruto.subtract(valor);
 		
+		// Poderia ser realizado dessa forma. Sendo assim as variaveis valor e salarioLiquido não seriam 
+		// mais necessárias.
+		// return salarioBruto.subtract(salarioBruto.multiply(percentualImpostoINSS).divide(new BigDecimal("100")).setScale(2, BigDecimal.ROUND_HALF_UP));
+		
 		return salarioLiquido;
 	}
 	
+	/*
+	 * Verifique o uso dos parênteses desnecessários
+	 * Veja como fazer validação usando o else if()
+	 * 
+	 */
 	public BigDecimal getValorINSS(BigDecimal salarioBruto) {
 
 		if(testeEntrada(salarioBruto))
@@ -46,6 +68,11 @@ public class CalculadoraSalario {
 				return (salarioBruto.multiply(new BigDecimal("11"))).divide(new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP);
 	}
 
+	/*
+	 * O método esta funcionando corretamente porém esta
+	 * muito complexo. Tente substituir o uso dos ifs encadeados
+	 * 
+	 */
 	public BigDecimal getValorPlanoDeSaude(Integer idade) {
 		String  valorEmStringsDoDesconto;
 		
