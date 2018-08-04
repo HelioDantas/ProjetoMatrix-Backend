@@ -1,13 +1,23 @@
 package br.com.projetomatrix.academico;
 
 
-
-public class Pessoa {
+public abstract class Pessoa {
 
 	private String name;
 	private Endereco endereco;
 	private String telefone;
 	private String cpf;
+	private String matricula;
+	private Status status;
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -32,6 +42,12 @@ public class Pessoa {
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	public String getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 	
 	

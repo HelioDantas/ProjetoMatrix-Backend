@@ -1,26 +1,17 @@
 package br.com.projetomatrix.academico;
 
 public class Professor extends Pessoa {
-	private String nomeCurso;
-	private double salario;
 	
-	public String getNomeCurso() {
-		return nomeCurso;
+	private Titulo titulo;
+
+	public Titulo getTitulo() {
+		return titulo;
 	}
-	public void setNomeCurso(String nomeCurso) {
-		this.nomeCurso = nomeCurso;
-	}
-	public double getSalario() {
-		return salario;
-	}
-	public void setSalario(double salario) {
-		this.salario = salario;
+
+	public void setTitulo(Titulo titulo) {
+		this.titulo = titulo;
 	}
 	
-	public double calcularSalario() {
-		
-		return 0;
-	}
 	
 
 

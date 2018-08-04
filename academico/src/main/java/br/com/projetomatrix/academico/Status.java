@@ -1,5 +1,7 @@
 package br.com.projetomatrix.academico;
 
-public class diciplina {
+public enum Status {
 
+		Ativo,
+		Inativo
 }
