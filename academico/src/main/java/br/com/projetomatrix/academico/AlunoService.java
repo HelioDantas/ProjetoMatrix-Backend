@@ -50,7 +50,7 @@ public class AlunoService {
 		String semestre = mes <= 6 ? "1" : "2";
 		sequencial++;
 		String StringSequencial = Integer.toString(sequencial);
-		String matricula = anoconvertido + "." + semestre + StringSequencial;
+		String matricula = anoconvertido + "." + semestre +"."+ StringSequencial;
 
 		return matricula;
 	}

@@ -1,57 +1,66 @@
 package br.com.projetomatrix.academico;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class SistemaAcademicoService {
-	private Long sequencial = new Long(0);
 
-	private Map<String, Aluno> hashAlunos = new HashMap<>();
+	private AlunoService aluno3 = new AlunoService();
+	private CursoService cursoService = new CursoService();
+	private Tumaservice turmaService = new Tumaservice();
 
-	public Aluno cadastrarAluno(Aluno aluno) {
-
-		if (aluno == null || hashAlunos.containsKey(aluno.getMatricula()))
-			return aluno;
-
-		aluno.setMatricula(gerarMatricular(aluno));
-		return aluno;
-	}
-
-	public Aluno recuperarAluno(String matricula) {
-		if (matricula == null || matricula.length() == 0)
-			throw new IllegalArgumentException();
-
-		return hashAlunos.get(matricula);
-	}
-
-	public void removerAluno(String matricula) {
-		if (matricula == null || matricula.length() == 0)
-			throw new IllegalArgumentException();
-
-		hashAlunos.remove(matricula);
-	}
-
-	public void atualizarAluno(Aluno alunonovo) {
-		if (alunonovo == null || alunonovo.getMatricula() == null || alunonovo.getMatricula().length() == 0)
-			throw new IllegalArgumentException();
-
-		removerAluno(alunonovo.getMatricula());
-		cadastrarAluno(alunonovo);
+	public Aluno criarAluno(String nome) {
+		Aluno novoAluno = new Aluno();
+		novoAluno.setName(nome);
+		aluno3.cadastrarAluno(novoAluno);
+		return novoAluno;
 
 	}
 
-	private String gerarMatricular(Aluno aluno) {
-		// TODO Auto-generated method stub
-		int ano = LocalDateTime.now().getYear();
-		String anoconvertido = Integer.toString(ano);
-		int mes = LocalDateTime.now().getMonthValue();
-		String semestre = mes <= 6 ? "1" : "2";
+	public Status BuscaStatusDoAluno(String matricula) {
+		Aluno aluno = aluno3.recuperarAluno(matricula);
 
-		sequencial.sum(sequencial, 1);
-		String matricula = anoconvertido + "." + semestre + sequencial;
+		return aluno.getStatus();
+	}
 
-		return matricula;
+	public void CadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
+
+		try {
+			Curso curso = cursoService.recuperarCurso(codigoDoCurso);
+			aluno.setCurso(curso);
+
+		} catch (Exception e) {
+			System.out.println("erro: " + e);
+		}
+
+	}
+
+	public void CadastrarAlunoEmTurma(Aluno aluno, String codigoDoTurma) {
+
+		try {
+			Turma turma = turmaService.recuperarTurma(codigoDoTurma);
+			HashMap<String, Aluno> alunos = turma.getAlunos();
+
+			if (alunos.containsKey(aluno.getMatricula()))
+				throw new IllegalArgumentException();
+
+			alunos.put(aluno.getMatricula(), aluno);
+			turma.setAlunos(alunos);
+			turmaService.atualizarTurma(turma);
+			
+			
+
+		} catch (Exception e) {
+			System.out.println("erro: " + e);
+		}
+		
+		
+	}
+		public List<Turma> BuscarTurmasDoAluno(){
+			
+			
+		}
+
 	}
 
 }
