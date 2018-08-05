@@ -55,4 +55,10 @@ public class AlunoService {
 		return matricula;
 	}
 
+	
+	public Status BuscaStatusDoAluno(String matricula) {
+		Aluno aluno = recuperarAluno(matricula);
+
+		return aluno.getStatus();
+	}
 }

@@ -17,11 +17,7 @@ public class SistemaAcademicoService {
 
 	}
 
-	public Status BuscaStatusDoAluno(String matricula) {
-		Aluno aluno = aluno3.recuperarAluno(matricula);
 
-		return aluno.getStatus();
-	}
 
 	public void CadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
 
@@ -35,7 +31,7 @@ public class SistemaAcademicoService {
 
 	}
 
-	public void CadastrarAlunoEmTurma(Aluno aluno, String codigoDoTurma) {
+	public boolean CadastrarAlunoEmTurma(Aluno aluno, String codigoDoTurma) {
 
 		try {
 			Turma turma = turmaService.recuperarTurma(codigoDoTurma);
@@ -43,22 +39,19 @@ public class SistemaAcademicoService {
 
 			if (alunos.containsKey(aluno.getMatricula()))
 				throw new IllegalArgumentException();
+			ArrayList<Turma> turmasEmQueOAlunoEstá = turmaService.BuscarTurmasDoAluno(aluno.getMatricula());
+			if (turmaService.DisponibilidadeDeTurma(turma, turmasEmQueOAlunoEstá)) {
 
-			alunos.put(aluno.getMatricula(), aluno);
-			turma.setAlunos(alunos);
-			turmaService.atualizarTurma(turma);
-			
-			
+				alunos.put(aluno.getMatricula(), aluno);
+				turma.setAlunos(alunos);
+				turmaService.atualizarTurma(turma);
+
+				return true;
+			} else
+				return false;
 
 		} catch (Exception e) {
-			System.out.println("erro: " + e);
-		}
-		
-		
-	}
-		public List<Turma> BuscarTurmasDoAluno(){
-			
-			
+			return false;
 		}
 
 	}

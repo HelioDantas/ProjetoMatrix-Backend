@@ -67,6 +67,19 @@ public class Tumaservice {
 
 	}
 
+	public boolean DisponibilidadeDeTurma(Turma turma, ArrayList<Turma> turmas) {
+
+		for (Turma turma2 : turmas) {
+			if (turma2.getHorario().getDiaDaSemana() == turma.getHorario().getDiaDaSemana())
+				return false;
+			else if (turma2.getHorario().getHorarioDeInicio() == turma.getHorario().getHorarioDeInicio())
+				return false;
+
+		}
+		return true;
+
+	}
+
 	public String gerarCodigo() {
 		sequencial++;
 
