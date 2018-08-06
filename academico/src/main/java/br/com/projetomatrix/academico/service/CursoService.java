@@ -1,7 +1,9 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.projetomatrix.academico.modelo.Curso;
 
 public class CursoService {
 	private int sequencial = 0;

@@ -1,8 +1,10 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.projetomatrix.academico.modelo.Turma;
 
 public class Tumaservice {
 	private int sequencial = 0;

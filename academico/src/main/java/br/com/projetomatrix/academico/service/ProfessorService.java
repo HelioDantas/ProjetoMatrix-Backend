@@ -1,8 +1,10 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.projetomatrix.academico.modelo.Professor;
 
 public class ProfessorService {
 	private int sequencial = 0;

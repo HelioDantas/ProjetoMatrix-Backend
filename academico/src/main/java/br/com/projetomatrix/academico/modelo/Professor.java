@@ -1,4 +1,6 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.modelo;
+
+import br.com.projetomatrix.academico.enumm.Titulo;
 
 public class Professor extends Pessoa {
 	

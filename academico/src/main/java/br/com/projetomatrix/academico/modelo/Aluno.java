@@ -1,6 +1,4 @@
-package br.com.projetomatrix.academico;
-
-
+package br.com.projetomatrix.academico.modelo;
 
 public class Aluno extends Pessoa{
 	private Curso curso;

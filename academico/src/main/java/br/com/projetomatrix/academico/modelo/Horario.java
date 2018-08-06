@@ -1,4 +1,6 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.modelo;
+
+import br.com.projetomatrix.academico.enumm.DiaDaSemana;
 
 public class Horario {
 	private DiaDaSemana diaDaSemana;

@@ -1,8 +1,11 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.projetomatrix.academico.enumm.Status;
+import br.com.projetomatrix.academico.modelo.Aluno;
 
 public class AlunoService {
 	private int sequencial = 0;

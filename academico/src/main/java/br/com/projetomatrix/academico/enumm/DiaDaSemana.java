@@ -1,4 +1,4 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.enumm;
 
 public enum DiaDaSemana {
 

@@ -3,6 +3,16 @@ package br.com.projetomatrix.academico;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import br.com.projetomatrix.academico.enumm.Status;
+import br.com.projetomatrix.academico.modelo.Aluno;
+import br.com.projetomatrix.academico.modelo.Curso;
+import br.com.projetomatrix.academico.modelo.Professor;
+import br.com.projetomatrix.academico.modelo.Turma;
+import br.com.projetomatrix.academico.service.AlunoService;
+import br.com.projetomatrix.academico.service.CursoService;
+import br.com.projetomatrix.academico.service.ProfessorService;
+import br.com.projetomatrix.academico.service.Tumaservice;
+
 public class SistemaAcademicoService {
 
 	private AlunoService aluno3 = new AlunoService();
@@ -107,7 +117,7 @@ public class SistemaAcademicoService {
 			HashMap<String, Aluno> alunos = turma.getAlunos();
 			if (alunos.containsKey(aluno.getMatricula()))
 				throw new IllegalArgumentException();
-			System.out.println(aluno.getMatricula());
+		//	System.out.println(aluno.getMatricula());
 
 			ArrayList<Turma> turmasEmQueOAlunoEstá = turmaService.BuscarTurmasDoAluno(aluno.getMatricula());
 			if (!turmaService.DisponibilidadeDeTurma(turma, turmasEmQueOAlunoEstá)) {
