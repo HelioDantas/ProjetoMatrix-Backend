@@ -8,6 +8,7 @@ public class Tumaservice {
 	private int sequencial = 0;
 
 	private Map<String, Turma> hashTurmas = new HashMap<>();
+	
 
 	public Turma cadastrarTurma(Turma turma) {
 
@@ -15,6 +16,7 @@ public class Tumaservice {
 			throw new IllegalArgumentException();
 
 		turma.setCodigo(gerarCodigo());
+		hashTurmas.put(turma.getCodigo(), turma);
 		return turma;
 	}
 
@@ -38,7 +40,6 @@ public class Tumaservice {
 
 		removerTurma(turma.getCodigo());
 		cadastrarTurma(turma);
-
 	}
 
 	public ArrayList<Turma> BuscarTurmasDoProfessor(String matricula) {
@@ -58,7 +59,11 @@ public class Tumaservice {
 		ArrayList<Turma> turmasDoAluno = new ArrayList<>();
 		for (String keyy : hashTurmas.keySet()) {
 			Turma turma = hashTurmas.get(keyy);
-			if (turma.getAlunos().containsKey(matricula))
+			System.out.println(turma.getAlunos());
+			if(turma.getAlunos()== null)
+				return null;
+			if(turma.getAlunos().containsKey(keyy))
+			System.out.println("11111");
 				turmasDoAluno.add(turma);
 
 		}
@@ -68,6 +73,8 @@ public class Tumaservice {
 	}
 
 	public boolean DisponibilidadeDeTurma(Turma turma, ArrayList<Turma> turmas) {
+		if(turma == null || turmas ==null)
+			return false;
 
 		for (Turma turma2 : turmas) {
 			if (turma2.getHorario().getDiaDaSemana() == turma.getHorario().getDiaDaSemana())

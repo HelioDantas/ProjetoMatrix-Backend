@@ -1,6 +1,5 @@
 package br.com.projetomatrix.academico;
 
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +12,10 @@ public class AlunoService {
 	public Aluno cadastrarAluno(Aluno aluno) {
 
 		if (aluno == null || hashAlunos.containsKey(aluno.getMatricula()))
-			return aluno;
+			throw new IllegalArgumentException();
 
 		aluno.setMatricula(gerarMatricular(aluno));
+		hashAlunos.put(aluno.getMatricula(), aluno);
 		return aluno;
 	}
 
@@ -50,13 +50,12 @@ public class AlunoService {
 		String semestre = mes <= 6 ? "1" : "2";
 		sequencial++;
 		String StringSequencial = Integer.toString(sequencial);
-		String matricula = anoconvertido + "." + semestre +"."+ StringSequencial;
+		String matricula = anoconvertido + "." + semestre + "." + StringSequencial;
 
 		return matricula;
 	}
 
-	
-	public Status BuscaStatusDoAluno(String matricula) {
+	public Status buscaStatusDoAluno(String matricula) {
 		Aluno aluno = recuperarAluno(matricula);
 
 		return aluno.getStatus();

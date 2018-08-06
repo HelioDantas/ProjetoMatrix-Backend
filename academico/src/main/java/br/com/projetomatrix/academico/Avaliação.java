@@ -4,6 +4,10 @@ public class Avaliação {
 
 	private String codigo;
 	private String dataDeRealizacao;
+	private String descricao;
+	private Modo modo;
+	private Aluno aluno;
+	private Professor professor;
 
 	public String getCodigo() {
 		return codigo;
@@ -52,10 +56,5 @@ public class Avaliação {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-
-	private String descricao;
-	private Modo modo;
-	private Aluno aluno;
-	private Professor professor;
 
 }
