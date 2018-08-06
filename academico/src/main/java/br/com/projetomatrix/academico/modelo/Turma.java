@@ -10,7 +10,7 @@ public class Turma {
 	private String dataDeEncerramento;
 	private Diciplina diciplina;
 	private Professor professor;
-	private HashMap<String, Aluno>  alunos;
+	private HashMap<String, Aluno>  alunos = new HashMap<>();
 	private Horario horario;
 
 	public String getCodigo() {
@@ -84,7 +84,9 @@ public class Turma {
 	public void setHorario(Horario horario) {
 		this.horario = horario;
 	}
-
+	public void addAl(Aluno al) {
+		this.alunos.put(al.getMatricula(), al);
+	}
 
 
 }

@@ -16,8 +16,8 @@ public class Tumaservice {
 
 		if (turma == null || hashTurmas.containsKey(turma.getCodigo()))
 			throw new IllegalArgumentException();
-
-		turma.setCodigo(gerarCodigo());
+		if(turma.getCodigo() == null)
+			turma.setCodigo(gerarCodigo());
 		hashTurmas.put(turma.getCodigo(), turma);
 		return turma;
 	}
@@ -61,7 +61,6 @@ public class Tumaservice {
 		ArrayList<Turma> turmasDoAluno = new ArrayList<>();
 		for (String keyy : hashTurmas.keySet()) {
 			Turma turma = hashTurmas.get(keyy);
-			System.out.println(turma.getAlunos());
 			if(turma.getAlunos()== null)
 				return null;
 			if(turma.getAlunos().containsKey(keyy))
@@ -75,8 +74,8 @@ public class Tumaservice {
 	}
 
 	public boolean DisponibilidadeDeTurma(Turma turma, ArrayList<Turma> turmas) {
-		if(turma == null || turmas ==null)
-			return false;
+		if(turma.getHorario() == null || turmas ==null)
+			return true;
 
 		for (Turma turma2 : turmas) {
 			if (turma2.getHorario().getDiaDaSemana() == turma.getHorario().getDiaDaSemana())

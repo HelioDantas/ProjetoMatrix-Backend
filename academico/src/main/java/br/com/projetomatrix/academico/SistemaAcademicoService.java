@@ -3,6 +3,8 @@ package br.com.projetomatrix.academico;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import br.com.projetomatrix.academico.enumm.Status;
 import br.com.projetomatrix.academico.modelo.Aluno;
 import br.com.projetomatrix.academico.modelo.Curso;
@@ -32,9 +34,9 @@ public class SistemaAcademicoService {
 
 	}
 
-	public Aluno recuperarAluno(Aluno aluno) {
+	public Aluno recuperarAluno(String matricula) {
 
-		return aluno3.recuperarAluno(aluno.getMatricula());
+		return aluno3.recuperarAluno(matricula);
 
 	}
 
@@ -115,16 +117,15 @@ public class SistemaAcademicoService {
 		try {
 			Turma turma = turmaService.recuperarTurma(codigoDoTurma);
 			HashMap<String, Aluno> alunos = turma.getAlunos();
-			if (alunos.containsKey(aluno.getMatricula()))
-				throw new IllegalArgumentException();
-		//	System.out.println(aluno.getMatricula());
+			if (alunos != null)
+				if (alunos.containsKey(aluno.getMatricula()))
+					throw new IllegalArgumentException();
 
 			ArrayList<Turma> turmasEmQueOAlunoEstá = turmaService.BuscarTurmasDoAluno(aluno.getMatricula());
-			if (!turmaService.DisponibilidadeDeTurma(turma, turmasEmQueOAlunoEstá)) {
-
+			if (turmaService.DisponibilidadeDeTurma(turma, turmasEmQueOAlunoEstá)) {
 				alunos.put(aluno.getMatricula(), aluno);
 				turma.setAlunos(alunos);
-				turmaService.atualizarTurma(turma);
+				atualizarTurma(turma);
 
 				return true;
 			} else

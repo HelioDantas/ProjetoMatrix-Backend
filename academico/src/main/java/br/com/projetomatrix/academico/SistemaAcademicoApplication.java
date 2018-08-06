@@ -19,24 +19,26 @@ public class SistemaAcademicoApplication {
 		Boolean i = false;
 		Turma turma = new Turma();
 		Aluno aluno = new Aluno();
-		aluno.setStatus(Status.Ativo);
+		//aluno.setStatus(Status.Ativo);
+	//	aluno.setName("helio");
 		ArrayList<Turma> turmas = new ArrayList<>();
 		turma = sistemaacademicoService.cadastrarTurma(turma);
-		//System.out.println(turma.getCodigo());
+	//	System.out.println(turma.getCodigo());
 
 		aluno = sistemaacademicoService.cadastrarAluno(aluno);
-		System.out.println(sistemaacademicoService.buscaStatusDoAluno(aluno));
-		
+		Aluno alll = sistemaacademicoService.recuperarAluno(aluno.getMatricula());
+	//	System.out.println(alll.getName());
+		Turma ttt = sistemaacademicoService.recuperarTurma(turma.getCodigo());
+		//System.out.println(ttt.getCodigo());
 
-		i = sistemaacademicoService.cadastrarAlunoEmTurma(aluno, turma.getCodigo());
-		//System.out.println(i);
+		i = sistemaacademicoService.cadastrarAlunoEmTurma(alll, turma.getCodigo());
+		System.out.println(i);
 		turmas = sistemaacademicoService.BuscarTurmasDoAluno(aluno.getMatricula());
-		//System.out.println(i);
-
+		//
 		for (Turma turma2 : turmas) {
 			System.out.println(turma2.getCodigo());
-
 		}
+	
 
 	}
 
