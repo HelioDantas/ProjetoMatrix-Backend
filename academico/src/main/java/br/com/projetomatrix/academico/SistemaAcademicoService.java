@@ -1,16 +1,19 @@
 package br.com.projetomatrix.academico;
 
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import br.com.projetomatrix.academico.enumm.Status;
 import br.com.projetomatrix.academico.modelo.Aluno;
+import br.com.projetomatrix.academico.modelo.Avaliacao;
 import br.com.projetomatrix.academico.modelo.Curso;
 import br.com.projetomatrix.academico.modelo.Professor;
 import br.com.projetomatrix.academico.modelo.Turma;
 import br.com.projetomatrix.academico.service.AlunoService;
+import br.com.projetomatrix.academico.service.AvaliacaoService;
 import br.com.projetomatrix.academico.service.CursoService;
 import br.com.projetomatrix.academico.service.ProfessorService;
 import br.com.projetomatrix.academico.service.Tumaservice;
@@ -21,6 +24,7 @@ public class SistemaAcademicoService {
 	private CursoService cursoService = new CursoService();
 	private Tumaservice turmaService = new Tumaservice();
 	private ProfessorService professorservice = new ProfessorService();
+	private AvaliacaoService avalicaoService = new AvaliacaoService();
 
 	public Status buscaStatusDoAluno(Aluno aluno) {
 
@@ -112,6 +116,30 @@ public class SistemaAcademicoService {
 
 	}
 
+	public void removerAvaliacao(Avaliacao avaliacao) {
+
+		avalicaoService.removerAvalicao(avaliacao.getCodigo());
+
+	}
+
+	public Avaliacao recuperarAvaliacao(String matricula) {
+
+		return avalicaoService.recuperarAvalicao(matricula);
+
+	}
+
+	public void atualizarAvaliacao(Avaliacao avaliacao) {
+
+		avalicaoService.atualizarAvalicao(avaliacao);
+
+	}
+
+	public Avaliacao cadastrarrAvaliacao(Avaliacao avaliacao) {
+
+		return avalicaoService.cadastrarAvalicao(avaliacao);
+
+	}
+
 	public boolean cadastrarAlunoEmTurma(Aluno aluno, String codigoDoTurma) {
 
 		try {
@@ -133,6 +161,28 @@ public class SistemaAcademicoService {
 
 		} catch (Exception e) {
 			return false;
+		}
+
+	}
+
+	public String cadastrarAvaliacaoDoAluno(String matriculaDoAluno, String codigoDoTurma, BigDecimal nota) {
+
+		try {
+			Turma turma = turmaService.recuperarTurma(codigoDoTurma);
+			Aluno aluno = recuperarAluno(matriculaDoAluno);
+			if (aluno == null || turma == null || nota == null)
+				throw new IllegalArgumentException();
+
+			if (turma.getAlunos().containsKey(matriculaDoAluno)) {
+				Avaliacao avaliacao = avalicaoService.criarAvalicao(aluno, turma, nota);
+				avaliacao = cadastrarrAvaliacao(avaliacao);
+				return avaliacao.getCodigo();
+			} else {
+				throw new IllegalArgumentException();
+			}
+
+		} catch (Exception e) {
+			return null;
 		}
 
 	}

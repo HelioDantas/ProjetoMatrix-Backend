@@ -14,8 +14,9 @@ public class ProfessorService {
 	public Professor cadastrarProfessor(Professor professor) {
 
 		if (professor == null || hashProfessor.containsKey(professor.getMatricula()))
-			return professor;
-
+			throw new IllegalArgumentException();
+		if (professor.getMatricula() == null)
+			hashProfessor.put(professor.getMatricula(), professor);
 		professor.setMatricula(gerarMatricular(professor));
 		return professor;
 	}
@@ -51,10 +52,9 @@ public class ProfessorService {
 		String semestre = mes <= 6 ? "1" : "2";
 		sequencial++;
 		String StringSequencial = Integer.toString(sequencial);
-		String matricula = anoconvertido + "." + semestre +"."+ StringSequencial;
+		String matricula = anoconvertido + "." + semestre + "." + StringSequencial;
 
 		return matricula;
 	}
-
 
 }

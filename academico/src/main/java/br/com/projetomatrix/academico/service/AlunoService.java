@@ -16,8 +16,8 @@ public class AlunoService {
 
 		if (aluno == null || hashAlunos.containsKey(aluno.getMatricula()))
 			throw new IllegalArgumentException();
-
-		aluno.setMatricula(gerarMatricular(aluno));
+		if (aluno.getMatricula() == null)
+			aluno.setMatricula(gerarMatricular(aluno));
 		hashAlunos.put(aluno.getMatricula(), aluno);
 		return aluno;
 	}

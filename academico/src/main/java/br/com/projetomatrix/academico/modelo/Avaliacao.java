@@ -1,15 +1,21 @@
 package br.com.projetomatrix.academico.modelo;
 
+import java.math.BigDecimal;
+
 import br.com.projetomatrix.academico.enumm.Modo;
 
-public class Avaliação {
+public class Avaliacao {
 
 	private String codigo;
 	private String dataDeRealizacao;
 	private String descricao;
+	private BigDecimal nota;
 	private Modo modo;
 	private Aluno aluno;
+	private Turma turma;
 	private Professor professor;
+	
+	
 
 	public String getCodigo() {
 		return codigo;
@@ -57,6 +63,22 @@ public class Avaliação {
 
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
+	}
+
+	public BigDecimal getNota() {
+		return nota;
+	}
+
+	public void setNota(BigDecimal nota) {
+		this.nota = nota;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 
 }
