@@ -48,7 +48,9 @@ public class Tumaservice {
 		ArrayList<Turma> turmasDoProfessor = new ArrayList<>();
 		for (String keyy : hashTurmas.keySet()) {
 			Turma turma = hashTurmas.get(keyy);
-			if (turma.getProfessor().getMatricula() == matricula)
+			if(turma.getProfessor() == null)
+				break;
+			if (turma.getProfessor().getMatricula().contains(matricula));
 				turmasDoProfessor.add(turma);
 
 		}
@@ -63,8 +65,7 @@ public class Tumaservice {
 			Turma turma = hashTurmas.get(keyy);
 			if(turma.getAlunos()== null)
 				return null;
-			if(turma.getAlunos().containsKey(keyy))
-			System.out.println("11111");
+			if(turma.getAlunos().containsKey(matricula))
 				turmasDoAluno.add(turma);
 
 		}
@@ -94,8 +95,5 @@ public class Tumaservice {
 		return Integer.toString(sequencial);
 	}
 
-	// public Turma AdicionarAlunoNaTurma(Aluno aluno String turma) {
-
-	// }
 
 }
