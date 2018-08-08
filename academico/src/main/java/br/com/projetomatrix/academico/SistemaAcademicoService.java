@@ -1,10 +1,8 @@
 package br.com.projetomatrix.academico;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 import br.com.projetomatrix.academico.enumm.Status;
 import br.com.projetomatrix.academico.modelo.Aluno;
@@ -85,18 +83,6 @@ public class SistemaAcademicoService {
 
 	}
 
-	public void cadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
-
-		try {
-			Curso curso = cursoService.recuperarCurso(codigoDoCurso);
-			aluno.setCurso(curso);
-
-		} catch (Exception e) {
-			System.out.println("erro: " + e);
-		}
-
-	}
-
 	public Professor cadastrarProfessor(Professor professor) {
 
 		return professorservice.cadastrarProfessor(professor);
@@ -137,6 +123,18 @@ public class SistemaAcademicoService {
 	public Avaliacao cadastrarrAvaliacao(Avaliacao avaliacao) {
 
 		return avalicaoService.cadastrarAvalicao(avaliacao);
+
+	}
+
+	public void cadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
+
+		try {
+			Curso curso = cursoService.recuperarCurso(codigoDoCurso);
+			aluno.setCurso(curso);
+
+		} catch (Exception e) {
+			System.out.println("erro: " + e);
+		}
 
 	}
 

@@ -1,6 +1,7 @@
 package br.com.projetomatrix.academico.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,26 +10,27 @@ import br.com.projetomatrix.academico.modelo.Avaliacao;
 import br.com.projetomatrix.academico.modelo.Turma;
 
 public class AvaliacaoService {
-
+	private int sequencial = 0;
 	private Map<String, Avaliacao> hashAvalicao = new HashMap<>();
-	
+
 	public Avaliacao criarAvalicao(Aluno aluno, Turma turma, BigDecimal nota) {
-		 Avaliacao novaAvalicao = new Avaliacao();
-		 novaAvalicao.setAluno(aluno);
-		 novaAvalicao.setTurma(turma);
-		 novaAvalicao.setNota(nota);
-		 
-		 return novaAvalicao;
-		
-		
+		Avaliacao novaAvalicao = new Avaliacao();
+		novaAvalicao.setAluno(aluno);
+		novaAvalicao.setTurma(turma);
+		novaAvalicao.setNota(nota);
+
+		return novaAvalicao;
+
 	}
 
 	public Avaliacao cadastrarAvalicao(Avaliacao avaliacao) {
 
 		if (avaliacao == null || hashAvalicao.containsKey(avaliacao.getCodigo()))
 			throw new IllegalArgumentException();
+
 		if (avaliacao.getCodigo() == null)
 			avaliacao.setCodigo(gerarCodigo(avaliacao.getAluno().getMatricula(), avaliacao.getTurma().getCodigo()));
+
 		hashAvalicao.put(avaliacao.getCodigo(), avaliacao);
 		return avaliacao;
 	}
@@ -56,12 +58,9 @@ public class AvaliacaoService {
 	}
 
 	public String gerarCodigo(String aluno, String Turma) {
-
-		return Turma + aluno;
+		
+		return Turma + aluno + Integer.toString(sequencial);
 	}
 
 	
-	
-	
-
 }
