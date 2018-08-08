@@ -225,7 +225,12 @@ public class SistemaAcademicoService {
 		
 		return media.getMedia();
 		
+	public Historico CriarHistorico(String matricula) {
 		
+		ArrayList<Turma> turmasDoAluno = BuscarTurmasDoAluno(matricula);
+		
+		
+	}
 		
 	}
 
