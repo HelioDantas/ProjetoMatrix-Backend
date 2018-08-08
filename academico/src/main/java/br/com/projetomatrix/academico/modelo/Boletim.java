@@ -1,12 +1,13 @@
 package br.com.projetomatrix.academico.modelo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Boletim {
-	private String codigo;
 	private Aluno aluno;
 	private Turma turma;
 	private ArrayList<Avaliacao> avaliacao;
+	private BigDecimal media;
 
 	public Aluno getAluno() {
 		return aluno;
@@ -24,13 +25,6 @@ public class Boletim {
 		this.turma = turma;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
 
 	public ArrayList<Avaliacao> getAvaliacao() {
 		return avaliacao;
@@ -39,5 +33,15 @@ public class Boletim {
 	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+
+	public BigDecimal getMedia() {
+		return media;
+	}
+
+	public void setMedia(BigDecimal media) {
+		this.media = media;
+	}
+
+
 
 }

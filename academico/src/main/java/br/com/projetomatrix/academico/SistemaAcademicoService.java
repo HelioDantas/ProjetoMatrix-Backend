@@ -7,11 +7,13 @@ import java.util.HashMap;
 import br.com.projetomatrix.academico.enumm.Status;
 import br.com.projetomatrix.academico.modelo.Aluno;
 import br.com.projetomatrix.academico.modelo.Avaliacao;
+import br.com.projetomatrix.academico.modelo.Boletim;
 import br.com.projetomatrix.academico.modelo.Curso;
 import br.com.projetomatrix.academico.modelo.Professor;
 import br.com.projetomatrix.academico.modelo.Turma;
 import br.com.projetomatrix.academico.service.AlunoService;
 import br.com.projetomatrix.academico.service.AvaliacaoService;
+import br.com.projetomatrix.academico.service.BoletimService;
 import br.com.projetomatrix.academico.service.CursoService;
 import br.com.projetomatrix.academico.service.ProfessorService;
 import br.com.projetomatrix.academico.service.Tumaservice;
@@ -23,6 +25,7 @@ public class SistemaAcademicoService {
 	private Tumaservice turmaService = new Tumaservice();
 	private ProfessorService professorservice = new ProfessorService();
 	private AvaliacaoService avalicaoService = new AvaliacaoService();
+	private BoletimService boletimService = new BoletimService();
 
 	public Status buscaStatusDoAluno(Aluno aluno) {
 
@@ -125,6 +128,15 @@ public class SistemaAcademicoService {
 		return avalicaoService.cadastrarAvalicao(avaliacao);
 
 	}
+	
+	public Boletim criarBotetim(String matricula, String codigoDaTurma) {
+		ArrayList<Avaliacao> avaliacoes = buscarAvaliacoesDoAlunoNaTurma(matricula + codigoDaTurma);
+		Aluno aluno = recuperarAluno(matricula);
+		Turma turma = recuperarTurma(codigoDaTurma);
+		
+		return boletimService.criarBoletim(aluno, turma, avaliacoes);
+		
+	}
 
 	public void cadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
 
@@ -184,6 +196,11 @@ public class SistemaAcademicoService {
 		}
 
 	}
+	
+	public ArrayList<Avaliacao> buscarAvaliacoesDoAlunoNaTurma(String matriculaCodigo) {
+		return avalicaoService.buscarAvaliacoesDoAlunoNaTurma(matriculaCodigo);
+		
+	}
 
 	public ArrayList<Turma> BuscarTurmasDoProfessor(String matricula) {
 
@@ -200,6 +217,16 @@ public class SistemaAcademicoService {
 
 		return turmaService.DisponibilidadeDeTurma(turma, turmas);
 
+	}
+	
+	public BigDecimal mediaDoAluno(String matricula, String codigoDaTurma) {
+		Boletim media = criarBotetim(matricula, codigoDaTurma);
+		
+		
+		return media.getMedia();
+		
+		
+		
 	}
 
 }

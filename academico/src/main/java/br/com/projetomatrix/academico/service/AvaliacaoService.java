@@ -57,10 +57,23 @@ public class AvaliacaoService {
 		cadastrarAvalicao(avaliacao);
 	}
 
-	public String gerarCodigo(String aluno, String Turma) {
-		
-		return Turma + aluno + Integer.toString(sequencial);
+	public String gerarCodigo(String aluno, String turma) {
+		ArrayList<Avaliacao> avaliacoesDoAluno = buscarAvaliacoesDoAlunoNaTurma(aluno + turma);
+		if (avaliacoesDoAluno.size() == 3)
+			throw new IllegalArgumentException();
+		return turma + aluno + Integer.toString(sequencial);
 	}
 
-	
+	public ArrayList<Avaliacao> buscarAvaliacoesDoAlunoNaTurma(String matriculaCodigo) {
+		ArrayList<Avaliacao> todasAsAvaliacoesNaTurma = new ArrayList<>();
+
+		for (String key : hashAvalicao.keySet()) {
+			if (key.contains(matriculaCodigo))
+				todasAsAvaliacoesNaTurma.add(hashAvalicao.get(key));
+
+		}
+
+		return todasAsAvaliacoesNaTurma;
+	}
+
 }
