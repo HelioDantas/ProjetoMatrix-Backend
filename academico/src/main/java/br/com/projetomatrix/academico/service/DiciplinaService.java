@@ -5,18 +5,16 @@ import java.util.Map;
 
 import br.com.projetomatrix.academico.modelo.Diciplina;
 
-
 public class DiciplinaService {
 	private int sequencial = 0;
 
 	private Map<String, Diciplina> hashDiciplina = new HashMap<>();
-	
 
 	public Diciplina cadastrarTurma(Diciplina diciplina) {
 
 		if (diciplina == null || hashDiciplina.containsKey(diciplina.getCodigo()))
 			throw new IllegalArgumentException();
-		if(diciplina.getCodigo() == null)
+		if (diciplina.getCodigo() == null)
 			diciplina.setCodigo(gerarCodigo());
 		hashDiciplina.put(diciplina.getCodigo(), diciplina);
 		return diciplina;
@@ -44,13 +42,10 @@ public class DiciplinaService {
 		cadastrarTurma(diciplina);
 	}
 
-
-
 	public String gerarCodigo() {
 		sequencial++;
 
 		return Integer.toString(sequencial);
 	}
-
 
 }

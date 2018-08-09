@@ -9,12 +9,14 @@ import br.com.projetomatrix.academico.modelo.Aluno;
 import br.com.projetomatrix.academico.modelo.Avaliacao;
 import br.com.projetomatrix.academico.modelo.Boletim;
 import br.com.projetomatrix.academico.modelo.Curso;
+import br.com.projetomatrix.academico.modelo.Historico;
 import br.com.projetomatrix.academico.modelo.Professor;
 import br.com.projetomatrix.academico.modelo.Turma;
 import br.com.projetomatrix.academico.service.AlunoService;
 import br.com.projetomatrix.academico.service.AvaliacaoService;
 import br.com.projetomatrix.academico.service.BoletimService;
 import br.com.projetomatrix.academico.service.CursoService;
+import br.com.projetomatrix.academico.service.HistoricoService;
 import br.com.projetomatrix.academico.service.ProfessorService;
 import br.com.projetomatrix.academico.service.Tumaservice;
 
@@ -26,6 +28,7 @@ public class SistemaAcademicoService {
 	private ProfessorService professorservice = new ProfessorService();
 	private AvaliacaoService avalicaoService = new AvaliacaoService();
 	private BoletimService boletimService = new BoletimService();
+	private HistoricoService historicoService = new HistoricoService();
 
 	public Status buscaStatusDoAluno(Aluno aluno) {
 
@@ -128,14 +131,14 @@ public class SistemaAcademicoService {
 		return avalicaoService.cadastrarAvalicao(avaliacao);
 
 	}
-	
+
 	public Boletim criarBotetim(String matricula, String codigoDaTurma) {
 		ArrayList<Avaliacao> avaliacoes = buscarAvaliacoesDoAlunoNaTurma(matricula + codigoDaTurma);
 		Aluno aluno = recuperarAluno(matricula);
 		Turma turma = recuperarTurma(codigoDaTurma);
-		
+
 		return boletimService.criarBoletim(aluno, turma, avaliacoes);
-		
+
 	}
 
 	public void cadastrarAlunoEmCurso(Aluno aluno, String codigoDoCurso) {
@@ -196,10 +199,35 @@ public class SistemaAcademicoService {
 		}
 
 	}
-	
+
+	public boolean cadastrarProfessorEmTurma(Professor profess, String codigoDoTurma) {
+
+		try {
+			Turma turma = recuperarTurma(codigoDoTurma);
+			Professor proff = turma.getProfessor();
+			Professor profess2 = profess;
+			if (profess2 != null || proff != null)
+				throw new IllegalArgumentException();
+
+			@SuppressWarnings("null")
+			ArrayList<Turma> turmasEmQueOProfessorEstá = BuscarTurmasDoProfessor(profess2.getMatricula());
+			if (turmaService.DisponibilidadeDeTurma(turma, turmasEmQueOProfessorEstá)) {
+
+				atualizarTurma(turma);
+
+				return true;
+			} else
+				return false;
+
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
 	public ArrayList<Avaliacao> buscarAvaliacoesDoAlunoNaTurma(String matriculaCodigo) {
 		return avalicaoService.buscarAvaliacoesDoAlunoNaTurma(matriculaCodigo);
-		
+
 	}
 
 	public ArrayList<Turma> BuscarTurmasDoProfessor(String matricula) {
@@ -218,20 +246,26 @@ public class SistemaAcademicoService {
 		return turmaService.DisponibilidadeDeTurma(turma, turmas);
 
 	}
-	
+
 	public BigDecimal mediaDoAluno(String matricula, String codigoDaTurma) {
 		Boletim media = criarBotetim(matricula, codigoDaTurma);
-		
-		
+
 		return media.getMedia();
-		
-	public Historico CriarHistorico(String matricula) {
-		
-		ArrayList<Turma> turmasDoAluno = BuscarTurmasDoAluno(matricula);
-		
-		
+
 	}
-		
+
+	public Historico CriarHistorico(String matricula) {
+		Historico historico = historicoService.criarHistotico();
+		ArrayList<Turma> turmasDoAluno = BuscarTurmasDoAluno(matricula);
+		ArrayList<Boletim> boletim = new ArrayList<>();
+		for (Turma turma : turmasDoAluno) {
+			boletim.add(criarBotetim(matricula, turma.getCodigo()));
+
+		}
+		historico.setMatriculaDoAluno(matricula);
+		historico.setBoletim(boletim);
+		return historico;
+
 	}
 
 }

@@ -49,7 +49,7 @@ public class Tumaservice {
 		for (String keyy : hashTurmas.keySet()) {
 			Turma turma = hashTurmas.get(keyy);
 			if(turma.getProfessor() == null)
-				break;
+				return null;
 			if (turma.getProfessor().getMatricula().contains(matricula));
 				turmasDoProfessor.add(turma);
 
