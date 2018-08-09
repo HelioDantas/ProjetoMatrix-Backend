@@ -3,7 +3,7 @@ package br.com.projetomatrix.academico.enumm;
 public enum StatusAcademico {
 	
 	APROVADO,
-	REPROVAD,
+	REPROVADO,
 	PROVA_FINAL;
 
 }

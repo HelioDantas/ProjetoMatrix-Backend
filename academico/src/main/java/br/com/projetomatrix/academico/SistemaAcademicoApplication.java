@@ -9,6 +9,7 @@ import org.springframework.expression.spel.ast.BooleanLiteral;
 import br.com.projetomatrix.academico.enumm.Status;
 import br.com.projetomatrix.academico.modelo.Aluno;
 import br.com.projetomatrix.academico.modelo.Turma;
+import br.com.projetomatrix.academico.service.SistemaAcademicoService;
 
 @SpringBootApplication
 public class SistemaAcademicoApplication {

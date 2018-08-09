@@ -1,10 +1,11 @@
-package br.com.projetomatrix.academico;
+package br.com.projetomatrix.academico.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.com.projetomatrix.academico.enumm.Status;
+import br.com.projetomatrix.academico.enumm.StatusAcademico;
 import br.com.projetomatrix.academico.modelo.Aluno;
 import br.com.projetomatrix.academico.modelo.Avaliacao;
 import br.com.projetomatrix.academico.modelo.Boletim;
@@ -12,13 +13,6 @@ import br.com.projetomatrix.academico.modelo.Curso;
 import br.com.projetomatrix.academico.modelo.Historico;
 import br.com.projetomatrix.academico.modelo.Professor;
 import br.com.projetomatrix.academico.modelo.Turma;
-import br.com.projetomatrix.academico.service.AlunoService;
-import br.com.projetomatrix.academico.service.AvaliacaoService;
-import br.com.projetomatrix.academico.service.BoletimService;
-import br.com.projetomatrix.academico.service.CursoService;
-import br.com.projetomatrix.academico.service.HistoricoService;
-import br.com.projetomatrix.academico.service.ProfessorService;
-import br.com.projetomatrix.academico.service.Tumaservice;
 
 public class SistemaAcademicoService {
 
@@ -268,4 +262,20 @@ public class SistemaAcademicoService {
 
 	}
 
+	public StatusAcademico SituacaoAcademica(String matricula, String codigoDaTurma) {
+		BigDecimal media = mediaDoAluno(matricula, codigoDaTurma);
+		BigDecimal number4 = new BigDecimal("4");
+		BigDecimal number6 = new BigDecimal("6");
+		
+		if (media.compareTo(number4) == -1 )
+			return  StatusAcademico.REPROVADO;
+		else 
+			if((media.compareTo(number4) == 0) || (media.compareTo(number4) == 1) && (media.compareTo(number6) == -1)) 
+				return StatusAcademico.PROVA_FINAL;
+			else 
+				return StatusAcademico.APROVADO;
+		
+		
+		
+	}
 }
