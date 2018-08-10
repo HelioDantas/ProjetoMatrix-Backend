@@ -240,7 +240,7 @@ public class SistemaAcademicoService {
 		return turmaService.DisponibilidadeDeTurma(turma, turmas);
 
 	}
-
+  
 	public BigDecimal mediaDoAluno(String matricula, String codigoDaTurma) {
 		Boletim media = criarBotetim(matricula, codigoDaTurma);
 
